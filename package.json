@@ -1,5 +1,5 @@
 {
-  "name": "electron-quick-start",
+  "name": "homeycommunity-desktop",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.cjs",
@@ -10,7 +10,7 @@
     "build": "vite build",
     "parallel": "NODE_ENV=development concurrently \"npm run dev\" \"npm run start\""
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/homeycommunity/desktop",
   "keywords": [
     "Electron",
     "quick",
@@ -18,8 +18,8 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Homey Community Space",
+  "license": "MIT",
   "devDependencies": {
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
