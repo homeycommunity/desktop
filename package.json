@@ -8,6 +8,7 @@
     "start": "electron .",
     "dev": "vite",
     "build": "vite build",
+    "mac": "electron-builder --mac",
     "parallel": "NODE_ENV=development concurrently \"npm run dev\" \"npm run start\""
   },
   "repository": "https://github.com/homeycommunity/desktop",

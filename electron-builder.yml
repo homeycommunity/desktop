@@ -1,0 +1,6 @@
+mac:
+  asarUnpack: ["compiled"]
+win:
+  asarUnpack: ["compiled"]
+linux:
+  asarUnpack: ["compiled"]

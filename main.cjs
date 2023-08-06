@@ -135,6 +135,6 @@ const __config = {
 }
 
 const appExpress = express();
-appExpress.use(express.static('dist'));
+appExpress.use(express.static(path.join(path.join(app.getAppPath(), 'compiled').replace('app.asar', 'app.asar.unpacked'))));
 
 appExpress.listen(9021);
