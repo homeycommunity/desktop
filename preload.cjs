@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require("electron")
+const { contextBridge, ipcRenderer } = require("electron");
 
 /**
  * The preload script runs before. It has access to web APIs
@@ -7,21 +7,21 @@ const { contextBridge, ipcRenderer } = require("electron")
  *
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener("DOMContentLoaded", () => {
   const replaceText = (selector, text) => {
-    const element = document.getElementById(selector)
-    if (element) element.innerText = text
-  }
+    const element = document.getElementById(selector);
+    if (element) element.innerText = text;
+  };
 
-  for (const type of ['chrome', 'node', 'electron']) {
-    replaceText(`${type}-version`, process.versions[type])
+  for (const type of ["chrome", "node", "electron"]) {
+    replaceText(`${type}-version`, process.versions[type]);
   }
-})
+});
 
-contextBridge.exposeInMainWorld('homey', {
+contextBridge.exposeInMainWorld("homey", {
   api: {
     login: async () => {
-      return await ipcRenderer.invoke('login');
-    }
-  }
+      return await ipcRenderer.invoke("login");
+    },
+  },
 });
