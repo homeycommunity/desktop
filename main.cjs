@@ -39,8 +39,8 @@ let store = {
 ipcMain.handle("login", async (event, arg) => {
   let listener;
   const api = new AthomCloudAPI({
-    clientId: config.athomApiClientId,
-    clientSecret: config.athomApiClientSecret,
+    clientId: config.ATHOM_API_CLIENT_ID,
+    clientSecret: config.ATHOM_API_CLIENT_SECRET,
     store,
   });
 
@@ -51,7 +51,8 @@ ipcMain.handle("login", async (event, arg) => {
     });
   });
 
-  const url = `${config.athomApiLoginUrl}?port=${port}&clientId=${config.athomApiClientId}&scopes[]=homey`;
+
+  const url = `${config.ATHOM_API_LOGIN_URL}?port=${port}&clientId=${config.ATHOM_API_CLIENT_ID}`;
   const subWindow = new BrowserWindow({
     width: 800,
     height: 600,
