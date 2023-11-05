@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardFooter, CardTitle } from "@/components/ui/card";
+import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/components/ui/use-toast";
+import { AthomCloudAPI } from "athom-api";
 import axios from "axios";
 import { useAuth } from "oidc-react";
 import { useState } from "react";
@@ -7,19 +10,27 @@ import { useState } from "react";
 declare const homey: any
 export function App () {
     const auth = useAuth();
-    const [authorizedHomey, setAuthorizedHomey] = useState<any>(null)
-    console.log(authorizedHomey)
+    const [authorizedHomey, setAuthorizedHomey] = useState<{ profile: AthomCloudAPI.User }>()
+    const { toast } = useToast();
     return <>
-        {authorizedHomey ? <div>
-            <h1 className="text-lg mb-4">Hi {authorizedHomey.profile.fullname},</h1>
+        {authorizedHomey ? <div style={{ height: '100vh', width: '100vw', padding: 40, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <h1 className="text-lg mb-4">Hi {authorizedHomey.profile.firstname},</h1>
             <h2>Registered Homey's</h2>
             <div className="">
-                {authorizedHomey.profile.homeys?.map((e: any) => <Card>
+                {authorizedHomey.profile.homeys?.map((e) => <Card>
                     <CardTitle>{e.name}</CardTitle>
-                    <CardDescription>{e.modelName}</CardDescription>
+                    <CardDescription>{(e as any).modelName}</CardDescription>
 
                     <CardFooter className="flex justify-between">
-                        <Button>Install</Button>
+                        <Button onClick={async () => {
+                            toast({
+                                title: `Installing on ${e.name}...`,
+                            })
+                            await homey.api.install(e);
+                            toast({
+                                title: `Installed on ${e.name}!`,
+                            })
+                        }}>Install</Button>
                     </CardFooter>
                 </Card>)}
             </div>
@@ -42,6 +53,6 @@ export function App () {
                 }} >Authorize with Homey</Button >
             </div>
         }
-
+        <Toaster />
     </>;
 }

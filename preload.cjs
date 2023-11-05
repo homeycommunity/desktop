@@ -23,5 +23,8 @@ contextBridge.exposeInMainWorld("homey", {
     login: async () => {
       return await ipcRenderer.invoke("login");
     },
+    install: async (homey) => {
+      return await ipcRenderer.invoke("install", { ...homey });
+    },
   },
 });
