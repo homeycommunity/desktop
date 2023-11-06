@@ -2,6 +2,7 @@ const { got } = require("got-cjs");
 
 const { tarGzGlob } = require("targz-glob");
 const FormData = require("form-data");
+const cors = require("cors");
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
@@ -14,6 +15,7 @@ const { AthomCloudAPI } = require('athom-api');
  * @type {import('athom-api').AthomCloudAPI}
  */
 let api = null;
+const server = 'https://homeycommunity.space';
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -27,11 +29,8 @@ function createWindow () {
     },
   });
 
-  if (process.env.NODE_ENV === "development") {
-    mainWindow.loadURL("http://localhost:5173/");
-  } else {
-    mainWindow.loadURL("http://localhost:9021/");
-  }
+  mainWindow.loadURL("http://localhost:9021/");
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
@@ -65,7 +64,7 @@ async function getApp (buffer) {
 async function install (event, arg) {
   const homeyId = arg._id;
 
-  const lastVersion = await got.get('https://homeycommunity.space/api/version/app').json();
+  const lastVersion = await got.get(`${server}/api/version/app`).json();
 
 
   const _cloudUser = await api.getAuthenticatedUser();
@@ -120,7 +119,19 @@ async function install (event, arg) {
 
   return postResponse.data;
 }
-
+ipcMain.handle("auth", async (event, arg) => {
+  const { access_token, token, homeys } = arg;
+  console.log(await got.post(`${server}/api/hcs/authorize`,
+    {
+      json: {
+        token: token,
+        homey: homeys.map((e) => ({ name: e.name, id: e.id }))
+      },
+      headers: {
+        'Authorization': `Bearer ${access_token}`
+      }
+    }).text())
+});
 ipcMain.handle("install", install);
 ipcMain.handle("login", async (event, arg) => {
   let listener;
@@ -233,6 +244,9 @@ const __config = {
 };
 
 const appExpress = express();
+appExpress.use(cors({
+  origin: "*",
+}));
 appExpress.use(
   express.static(
     path.join(

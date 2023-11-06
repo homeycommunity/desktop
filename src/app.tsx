@@ -3,7 +3,6 @@ import { Card, CardDescription, CardFooter, CardTitle } from "@/components/ui/ca
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
 import { AthomCloudAPI } from "athom-api";
-import axios from "axios";
 import { useAuth } from "oidc-react";
 import { useState } from "react";
 
@@ -40,16 +39,7 @@ export function App () {
                 <Button onClick={async () => {
                     const _auth = await homey.api.login();
                     setAuthorizedHomey(_auth)
-                    await axios.post('https://homeycommunity.space/api/hcs/authorize', {
-                        token: _auth.token,
-                        homey: _auth.profile.homeys.filter((e: any) => e.platform === 'local').map((e: any) => ({ name: e.name, id: e.id }))
-                    }, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${auth.userData?.access_token}`
-                        }
-
-                    })
+                    await homey.api.auth(auth.userData?.access_token, _auth.token, _auth.profile.homeys.filter((e: any) => e.platform === 'local'))
                 }} >Authorize with Homey</Button >
             </div>
         }
