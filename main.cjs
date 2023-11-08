@@ -15,7 +15,8 @@ const { AthomCloudAPI } = require('athom-api');
  * @type {import('athom-api').AthomCloudAPI}
  */
 let api = null;
-const server = 'https://homeycommunity.space';
+// const server = 'https://homeycommunity.space';
+const server = 'http://localhost:3000';
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -121,7 +122,7 @@ async function install (event, arg) {
 }
 ipcMain.handle("auth", async (event, arg) => {
   const { access_token, token, homeys } = arg;
-  console.log(await got.post(`${server}/api/hcs/authorize`,
+  await got.post(`${server}/api/hcs/authorize`,
     {
       json: {
         token: token,
@@ -130,7 +131,7 @@ ipcMain.handle("auth", async (event, arg) => {
       headers: {
         'Authorization': `Bearer ${access_token}`
       }
-    }).text())
+    }).text()
 });
 ipcMain.handle("install", install);
 ipcMain.handle("login", async (event, arg) => {

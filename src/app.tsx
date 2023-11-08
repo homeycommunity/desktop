@@ -38,8 +38,9 @@ export function App () {
                 <h1 className="text-lg mb-4">Homey Community Space</h1>
                 <Button onClick={async () => {
                     const _auth = await homey.api.login();
-                    setAuthorizedHomey(_auth)
                     await homey.api.auth(auth.userData?.access_token, _auth.token, _auth.profile.homeys.filter((e: any) => e.platform === 'local'))
+
+                    setAuthorizedHomey(_auth);
                 }} >Authorize with Homey</Button >
             </div>
         }

@@ -14,7 +14,6 @@ ReactDOM.createRoot(root!).render(
   <React.StrictMode>
     <AuthProvider authority='https://auth.homeycommunity.space/application/o/hcs-app' redirectUri='http://localhost:9021/' clientId={config.CLIENT_ID} clientSecret={config.CLIENT_SECRET}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-
         <App />
       </ThemeProvider>
     </AuthProvider>
