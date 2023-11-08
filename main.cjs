@@ -15,8 +15,8 @@ const { AthomCloudAPI } = require('athom-api');
  * @type {import('athom-api').AthomCloudAPI}
  */
 let api = null;
-// const server = 'https://homeycommunity.space';
-const server = 'http://localhost:3000';
+const server = 'https://homeycommunity.space';
+// const server = 'http://localhost:3000';
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
