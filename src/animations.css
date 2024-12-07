@@ -1,0 +1,88 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+.animation-delay-500 { animation-delay: 500ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-fade-up {
+    animation: none;
+    opacity: 1;
+  }
+  
+  .bg-pattern {
+    animation: none !important;
+  }
+}
+
+.bg-pattern {
+  background-color: #000000;
+  background-image: 
+    linear-gradient(125deg, rgba(30, 58, 138, 0.05) 0%, rgba(0, 0, 0, 0.95) 40%, rgba(30, 58, 138, 0.1) 60%, rgba(0, 0, 0, 0.95) 100%),
+    repeating-linear-gradient(45deg, rgba(59, 130, 246, 0.03) 0px, rgba(59, 130, 246, 0.03) 1px, transparent 1px, transparent 10px);
+  background-size: 400% 400%, 10px 10px;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Add subtle scale to hover effects */
+.hover\:scale-up {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover\:scale-up:hover {
+  transform: scale(1.02);
+}
+
+/* Improve button hover states */
+.btn-gradient {
+  background-size: 200% 100%;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background-position: right center;
+}
