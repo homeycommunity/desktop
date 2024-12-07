@@ -10,10 +10,7 @@ const config = {
   CLIENT_SECRET: "efsrHftGYP4qtRuJu1XA2XtbqBOLyFPi",
 };
 
-const redirectUri =
-  process?.env?.NODE_ENV === "development"
-    ? "http://localhost:5173/"
-    : "http://localhost:9021/";
+const redirectUri = "http://localhost:9021/";
 const root = document.getElementById("root");
 ReactDOM.createRoot(root!).render(
   <React.StrictMode>

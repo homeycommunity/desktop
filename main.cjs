@@ -15,10 +15,7 @@ const { AthomCloudAPI } = require("athom-api");
  * @type {import('athom-api').AthomCloudAPI}
  */
 let api = null;
-const server =
-  process?.env?.NODE_ENV === "development"
-    ? "http://127.0.0.1:3000/"
-    : "https://homeycommunity.space";
+const server = "https://homeycommunity.space";
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -32,11 +29,7 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadURL(
-    process?.env?.NODE_ENV === "development"
-      ? "http://localhost:5173/"
-      : "http://localhost:9021/"
-  );
+  mainWindow.loadURL("http://localhost:9021/");
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
