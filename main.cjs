@@ -71,8 +71,8 @@ async function install(event, arg) {
   const stream = await got.get(lastVersion.url).buffer();
 
   const env = `{
-    "CLIENT_ID": "toq9m4bjq45bv4mko37xp",
-    "CLIENT_SECRET": "efsrHftGYP4qtRuJu1XA2XtbqBOLyFPi",
+    "CLIENT_ID": "kogi8t1uwtmo365jop5vi",
+    "CLIENT_SECRET": "0siXwzdMqlBdKGbrzbURozLLscI3YAwq",
     "MINIO_SECRET": "4KQSOEf8i3qQduu5pM2EIgvpFWpWGGOly1a1OmCn",
     "MINIO_ACCESS": "IVdvDHVncNOLg2JtEz9v"
 }`;
