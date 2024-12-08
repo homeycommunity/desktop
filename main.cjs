@@ -122,7 +122,11 @@ ipcMain.handle("auth", async (event, arg) => {
     .post(`${server}/api/hcs/authorize`, {
       json: {
         token: token,
-        homey: homeys.map((e) => ({ name: e.name, id: e.id })),
+        homey: homeys.map((e) => ({
+          name: e.name,
+          id: e.id,
+          remoteUrl: e.remoteUrl,
+        })),
       },
       headers: {
         Authorization: `Bearer ${access_token}`,
@@ -197,6 +201,7 @@ ipcMain.handle("login", async (event, arg) => {
   const token = await api.authenticateWithAuthorizationCode(code);
 
   try {
+    console.log(token);
     await api.setToken(token);
 
     const profile = await api.getAuthenticatedUser();
