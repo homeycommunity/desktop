@@ -126,6 +126,8 @@ ipcMain.handle("auth", async (event, arg) => {
           name: e.name,
           id: e.id,
           remoteUrl: e.remoteUrl,
+          localUrl: e.localUrlSecure,
+          remoteUrlForwarded: e.remoteUrlForwarded,
         })),
       },
       headers: {
